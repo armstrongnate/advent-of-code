@@ -11,6 +11,7 @@ let input = try! String(contentsOf: Bundle.main.url(forResource: "input", withEx
     .split(separator: "\n")
     .map { Int(String($0))! }
 
+// part 1
 var previous: Int?
 var count = 0
 for i in input {
@@ -20,4 +21,19 @@ for i in input {
     previous = i
 }
 
-print("result: \(count)")
+print("part 1: \(count)")
+
+// part 2
+count = 0
+var i = 0
+previous = nil
+while i < input.count - 2 {
+    let sum = input[i..<i+3].reduce(0, +)
+    if let previous = previous, sum > previous {
+        count = count + 1
+    }
+    previous = sum
+    i = i + 1
+}
+
+print("part 2: \(count)")
